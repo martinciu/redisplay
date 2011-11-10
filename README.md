@@ -83,7 +83,7 @@ If you're running multiple, separate instances of redisplay you may want
 to namespace the keyspaces so they do not overlap. This is not unlike
 the approach taken by many memcached clients.
 
-This feature is provided by the [redis-namespace][rs] library, which
+This feature is provided by the [redis-namespace](https://github.com/defunkt/redis-namespace) library, which
 redisplay uses by default to separate the keys it manages from other keys
 in your Redis server.
 
