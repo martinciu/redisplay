@@ -1,1 +1,8 @@
 <h1>Redisplay</h1>
+Key: <input type="text" name="query" id="query" />
+<div id="keys" ></div>
+<script id="keys-template" type="text/x-handlebars-template">
+  {{#each keys}}
+  <li>{{this}}</li>
+  {{/each}}
+</script>

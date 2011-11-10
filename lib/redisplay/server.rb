@@ -17,10 +17,20 @@ module Redisplay
       def path_prefix
         request.env['SCRIPT_NAME']
       end
-    end
+    
+      def render_json(body)
+        content_type :json
+        body.to_json
+      end
+  
+  end
 
     get '/' do
       erb :index
+    end
+
+    get '/keys/:pattern' do
+      render_json Redisplay.redis.keys(params[:pattern]).sort.first(100)
     end
 
   end
