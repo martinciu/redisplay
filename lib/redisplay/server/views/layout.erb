@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Redisplay</title>
+  <!--[if lt IE 9]><script language="javascript" type="text/javascript" src="<%=url 'excanvas.min.js' %>"></script><![endif]-->
+  <script language="javascript" type="text/javascript" src="<%=url 'jquery-1.7.min.js' %>"></script>
+  <link href="<%=url 'reset.css' %>" media="screen" rel="stylesheet" type="text/css">
+  <link href="<%=url 'style.css' %>" media="screen" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <div class="header">
+    <ul class='nav'>
+      <li class="current"><a href="<%= url '/' %>">Redisplay</a></li>
+    </ul>
+    <% if Redisplay.redis.is_a?(Redis::Namespace) %>
+    <abbr class="namespace" title="Redisplay's Redis Namespace">
+     <%= Redisplay.redis.namespace %>
+    </abbr>
+    <% end %>
+  </div>
+
+  <div id="main">
+    <%= yield %>
+  </div>
+
+  <div id="footer">
+    <p>Powered by <a href="http://github.com/martinciu/redisplay">Redisplay</a> v<%=Redisplay::VERSION%></p>
+    <% if Redisplay.redis.is_a?(Redis::Namespace) %>
+    <p>Connected to Redis namespace <%= Redisplay.redis.namespace %> on <%=Redisplay.redis_id%></p>
+    <% else %>
+    <p>Connected to Redis on <%=Redisplay.redis_id%></p>
+    <% end %>
+  </div>
+
+</body>
+</html>
