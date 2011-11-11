@@ -23,23 +23,28 @@ module Redisplay
         body.to_json
       end
 
+      def render_text(body)
+        content_type 'text/plain', :charset => 'utf-8'
+        body.to_s
+      end
+
       def redis
         @redis ||= Redisplay.redis
       end
 
       def value(key)
         case redis.type(key)
-          when "string" then redis.get(params[:key])
-          when "hash" then redis.hgetall(params[:key])
+          when "string" then redis.get(key)
+          when "hash" then redis.hgetall(key)
           when "list" then
-            len = redis.llen(params[:key])
+            len = redis.llen(key)
             list = []
             for i in 0..len - 1
-              list << redis.lindex(params[:key], i)
+              list << redis.lindex(key, i)
             end
             list
-          when "set" then redis.smembers(params[:key])
-          when "zset" then redis.zrange(params[:key], 0, -1)
+          when "set" then redis.smembers(key)
+          when "zset" then redis.zrange(key, 0, -1)
           else ""
         end
       end
@@ -54,8 +59,8 @@ module Redisplay
       render_json redis.keys(params[:pattern]).sort.first(100)
     end
 
-    get '/key/:key' do
-      render_json value(params[:key])
+    get '/key/*' do |key|
+      render_text value(key)
     end
 
   end

@@ -37,36 +37,36 @@ describe Redisplay::Server do
     it "/key/mystring returns string" do
       get '/key/mystring'
       last_response.status.must_equal 200
-      last_response['Content-Type'].must_equal 'application/json;charset=utf-8'
-      last_response.body.must_equal "\"string\""
+      last_response['Content-Type'].must_equal 'text/plain;charset=utf-8'
+      last_response.body.must_equal "string"
     end
 
     it "/key/myhash returns hash" do
       get '/key/myhash'
       last_response.status.must_equal 200
-      last_response['Content-Type'].must_equal 'application/json;charset=utf-8'
-      last_response.body.must_equal "{\"foo\":\"1\",\"bar\":\"2\"}"
+      last_response['Content-Type'].must_equal 'text/plain;charset=utf-8'
+      last_response.body.must_equal "{\"foo\"=>\"1\", \"bar\"=>\"2\"}"
     end
 
     it "/key/list returns list" do
       get '/key/list'
       last_response.status.must_equal 200
-      last_response['Content-Type'].must_equal 'application/json;charset=utf-8'
-      last_response.body.must_equal "[\"bar\",\"foo\"]"
+      last_response['Content-Type'].must_equal 'text/plain;charset=utf-8'
+      last_response.body.must_equal "[\"bar\", \"foo\"]"
     end
 
     it "/key/set returns set" do
       get '/key/set'
       last_response.status.must_equal 200
-      last_response['Content-Type'].must_equal 'application/json;charset=utf-8'
-      last_response.body.must_equal "[\"foo\",\"bar\"]"
+      last_response['Content-Type'].must_equal 'text/plain;charset=utf-8'
+      last_response.body.must_equal "[\"foo\", \"bar\"]"
     end
 
     it "/key/zset returns sortedset" do
       get '/key/zset'
       last_response.status.must_equal 200
-      last_response['Content-Type'].must_equal 'application/json;charset=utf-8'
-      last_response.body.must_equal "[\"bar\",\"foo\"]"
+      last_response['Content-Type'].must_equal 'text/plain;charset=utf-8'
+      last_response.body.must_equal "[\"bar\", \"foo\"]"
     end
   end
 end

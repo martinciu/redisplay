@@ -1,8 +1,11 @@
 <h1>Redisplay</h1>
-Key: <input type="text" name="query" id="query" />
+Key: <input type="text" name="query" id="query" autocomplete="off" />
 <div id="keys" ></div>
 <script id="keys-template" type="text/x-handlebars-template">
   {{#each keys}}
-  <li>{{this}}</li>
+  <li><a href="#" data-key="{{this}}">{{this}}</a><p style="display:none;"></p></li>
   {{/each}}
+</script>
+<script id="value-template" type="text/x-handlebars-template">
+  {{this}}
 </script>
