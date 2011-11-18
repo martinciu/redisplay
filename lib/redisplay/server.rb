@@ -28,27 +28,6 @@ module Redisplay
         body.to_s
       end
 
-      def redis
-        @redis ||= Redisplay.redis
-      end
-
-      def value(key)
-        case redis.type(key)
-          when "string" then redis.get(key)
-          when "hash" then redis.hgetall(key)
-          when "list" then
-            len = redis.llen(key)
-            list = []
-            for i in 0..len - 1
-              list << redis.lindex(key, i)
-            end
-            list
-          when "set" then redis.smembers(key)
-          when "zset" then redis.zrange(key, 0, -1)
-          else ""
-        end
-      end
-  
     end
 
     get '/' do
@@ -56,11 +35,11 @@ module Redisplay
     end
 
     get '/keys/:pattern' do
-      render_json redis.keys(params[:pattern]).sort.first(100)
+      render_json Redisplay::Key.all(params[:pattern]).sort.first(100)
     end
 
     get '/key/*' do |key|
-      render_text value(key)
+      render_text Redisplay::Field.new(key)
     end
 
   end

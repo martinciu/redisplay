@@ -2,6 +2,8 @@ require 'redis/namespace'
 require 'json'
 
 require "redisplay/version"
+require "redisplay/key"
+require "redisplay/field"
 require "redisplay/server"
 
 module Redisplay

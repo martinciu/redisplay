@@ -13,6 +13,8 @@ require 'turn'
 require 'mocha'
 require 'rack/test'
 
+require 'redisplay'
+
 if !ENV['TRAVIS']
 
   # make sure we can run redis
